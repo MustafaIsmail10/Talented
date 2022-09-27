@@ -38,11 +38,11 @@
 
 
                         {% if profile.got_skills%}
-                        <button type="submit" class="btn btn-dark disabled ">Get Skills</button>
+                        <button type="submit" class="btn btn-dark disabled mb-2 ">Get Skills</button>
                         {% else %}
 
                         <form method="POST" action="{% url 'profile_skill' profile.id %}"> {% csrf_token %}
-                            <button type="submit" class="btn btn-dark">Get Skills</button>
+                            <button type="submit" class="btn btn-dark  mb-2 ">Get Skills</button>
                         </form>
 
                         {% endif %}
@@ -56,13 +56,13 @@
 
                         {% if profile.star%}
                         <form method="POST" action="{% url 'profile_star' profile.id %}"> {% csrf_token %}
-                            <button type="submit" class="btn btn-warning">Star</button>
+                            <button type="submit" class="btn btn-warning  mb-2 ">Star</button>
                         </form>
 
                         {% else %}
 
                         <form method="POST" action="{% url 'profile_star' profile.id %}"> {% csrf_token %}
-                            <button type="submit" class="btn btn-secondary">Star</button>
+                            <button type="submit" class="btn btn-secondary  mb-2 ">Star</button>
                         </form>
 
                         {% endif %}
@@ -73,7 +73,7 @@
 
                     <li class="list-inline-item">
                         <form method="POST" action="{% url 'profile_delete' profile.id %}"> {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger  mb-2 ">Delete</button>
                         </form>
                     </li>
 
