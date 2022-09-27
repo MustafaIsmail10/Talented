@@ -9,7 +9,7 @@ table.field_names = ["Repository Name", "Created Date", "Language", "Stars"]
 def search(q):
     url = "https://api.github.com/search/users"
     headers = {"Accept": "application/vnd.github+json"}
-    params = {"q": q, "per_page": 10}
+    params = {"q": q, "per_page": 50}
 
     response = requests.get(url=url, headers=headers, params=params)
     data = response.json()
@@ -27,5 +27,3 @@ def get_skills(repos_url):
             skills = skills + language + " "
             skill_lst.append(language)
     return skills
-
-
