@@ -6,7 +6,7 @@ This software is developed to help find talents in github that is suitable for a
 
     * search github users database 
     * allow you to organize the results and star interesting users
-    * It allows to add comments to eahc user
+    * It allows to add comments to each user
 
 ## Implementation
 
