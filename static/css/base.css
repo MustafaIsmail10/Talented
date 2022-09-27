@@ -1,8 +1,8 @@
 .mainContent {
-    min-height: 800px;
+    min-height: 1000px;
 }
 
-main {
+body {
     padding-top: 70px;
     background: rgb(22, 28, 45);
     background: linear-gradient(180deg, rgba(22, 28, 45, 1) 0%, rgba(66, 186, 150, 1) 100%, rgba(246, 246, 246, 1) 100%);
