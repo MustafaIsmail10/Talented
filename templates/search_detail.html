@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{search.title}}{% endblock title %}
+{% block content %}
+<div class="row justify-content-between ">
+    <div class="col-md-10 mb-3">
+        <h2>Search about {{search.title}}</h2>
+    </div>
+
+
+
+
+    {% if star%}
+
+    <div class=" mb-3 col-sm-2 col-lg-1">
+        <form method="GET" action="{% url 'search_item' search.id %}"> {% csrf_token %}
+            <button type="submit" class="btn btn-success">All</button>
+        </form>
+    </div>
+
+    {% else %}
+
+    <div class=" mb-3 col-sm-2 col-lg-1">
+        <form method="GET" action="{% url 'search_star' search.id %}"> {% csrf_token %}
+            <button type="submit" class="btn btn-warning">Stars</button>
+        </form>
+    </div>
+    {% endif %}
+
+
+
+
+    <div class=" mb-3 col-sm-2 col-lg-1">
+        <form method="POST" action="{% url 'search_delete' search.id%}"> {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+
+</div>
+
+{% for profile in profiles %}
+
+{% if star and profile.star or not star %}
+
+
+<div class="card text-white bg-dark mb-3">
+    <div class="row g-0">
+        <div class="col-12 col-sm-4 col-md-3 col-lg-2">
+            <img src="{{profile.avatar_url}}" class="img-fluid rounded-start" style="width: 180px;"
+                alt="The avatar of the profile">
+        </div>
+        <div class="col-12 col-sm-8 col-md-9 col-lg-10">
+            <div class="card-body container-fluid">
+                <div class="row justify-content-between">
+                    <h5 class="card-title col-8 col-md-9 col-lg-10">{{ profile.name }}</h5>
+                    <a class="card-text col-4 col-md-3 col-lg-2" href="{{profile.html_url}}"><small
+                            class="text-muted">Github
+                            page</small></a>
+                </div>
+
+                <div class="row card-body container-fluid">
+                    {{profile.comment_set.all.0.comment}}
+                </div>
+
+                <div class="row card-body container-fluid">
+                    <div class="row justify-content-between">
+
+                        <div class="col-1">
+                            {% if profile.star%}
+                            <form method="POST" action="{% url 'profile_starX' profile.id search.id%}">
+                                {%csrf_token%}
+                                <button type="submit" class="btn btn-warning btn-sm">Star</button>
+                            </form>
+
+                            {% else %}
+
+                            <form method="POST" action="{% url 'profile_starX' profile.id search.id %}">
+                                {%csrf_token%}
+                                <button type="submit" class="btn btn-secondary btn-sm">Star</button>
+                            </form>
+
+                            {% endif %}
+
+                        </div>
+
+
+
+
+                        <a href="{% url 'profile_detail' profile.id%}" class="btn btn-success btn-sm col-2">Show
+                            Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+{% endif %}
+
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block import %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock import %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+<form class="row align-items-center justify-content-center" method="POST" action="{% url 'search_list' %}">
+    {% csrf_token %}
+    <div class="col-md-10 mb-3 align-self-center">
+        <label class="visually-hidden" for="inlineFormInputGroupUsername">Search</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search for a Talent"
+                name="q">
+        </div>
+    </div>
+
+
+
+    <div class="col-auto cal-md-2 mb-3">
+        <button type="submit" class="btn btn-success">search</button>
+    </div>
+</form>
+
+
+
+{% for search in search_list %}
+
+<div class="card mb-3 text-white bg-dark">
+    <div class="card-header">
+        <h2>Search about {{search.title}} </h2>
+    </div>
+    <div class="card-body">
+
+        {% if search.profile_set.all.0 %}
+
+        <div class="row row-cols-1 row-cols-md-3 g-4 ">
+            <div class="col">
+                <div class="card  text-white bg-success mb-3 ">
+                    <img src="{{search.profile_set.all.0.avatar_url}}" class="card-img-top"
+                        alt="The image of the profile">
+                    <div class="card-body">
+                        <h5 class="card-title">{{search.profile_set.all.0.name}}</h5>
+                        <p class="card-text">{{search.profile_set.all.0.comment_set.all.0.comment}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card  text-white bg-success mb-3 ">
+                    <img src="{{search.profile_set.all.1.avatar_url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{search.profile_set.all.1.name}}</h5>
+                        <p class="card-text">{{search.profile_set.all.1.comment_set.all.0.comment}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card  text-white bg-success mb-3 ">
+                    <img src="{{search.profile_set.all.2.avatar_url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{search.profile_set.all.2.name}}</h5>
+                        <p class="card-text">{{search.profile_set.all.2.comment_set.all.0.comment}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+
+        <h3>
+            Unfotunately, There is no Talents to show
+        </h3>
+
+        {% endif %}
+
+
+        <a href="{% url 'search_item' search.id %}" class="btn btn-success">View Details</a>
+
+    </div>
+
+    <div class="card-footer text-muted">
+        {{search.date}}
+    </div>
+</div>
+
+{% endfor %}
+
+
+
+
+
+{% else %}
+<h1 class="text-center ">Welcome to one of the best talent Finders</h1>
+<p class="text-center ">This website would help you find the best talents that fits you company the best</p>
+<div class="row justify-content-center">
+    <a class="btn btn-success col-4" href="{% url 'signup' %}">Get Started</a>
+</div>
+
+{% endif %}
+
+
+
+{% endblock content %}

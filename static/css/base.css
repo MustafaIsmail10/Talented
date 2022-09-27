@@ -1,0 +1,27 @@
+.mainContent {
+    min-height: 800px;
+}
+
+main {
+    padding-top: 70px;
+    background: rgb(22, 28, 45);
+    background: linear-gradient(180deg, rgba(22, 28, 45, 1) 0%, rgba(66, 186, 150, 1) 100%, rgba(246, 246, 246, 1) 100%);
+    color: white;
+}
+
+
+.signup-form div li {
+    color: white;
+}
+
+#hint_id_password2 {
+    color: white !important;
+}
+
+#hint_id_username {
+    color: white !important;
+}
+
+a {
+    text-decoration: none !important;
+}

@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{profile.name}}{% endblock title %}
+
+
+{% block import %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock import %}
+
+
+{% block content %}
+
+
+
+
+
+
+<div class="row py-5 px-4 text-dark">
+    <div class="col-md-5 mx-auto">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3"><img src="{{profile.avatar_url}}" alt="..." width="130"
+                            class="rounded mb-2 img-thumbnail"><a href="{{profile.html_url}}"
+                            class="btn btn-outline-dark btn-sm btn-block">Github</a></div>
+                    <div class="media-body mb-5 text-white">
+                        <h4 class="mt-0 mb-0">{{profile.name}}</h4>
+                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+
+
+                    <li class="list-inline-item">
+
+
+                        {% if profile.got_skills%}
+                        <button type="submit" class="btn btn-dark disabled ">Get Skills</button>
+                        {% else %}
+
+                        <form method="POST" action="{% url 'profile_skill' profile.id %}"> {% csrf_token %}
+                            <button type="submit" class="btn btn-dark">Get Skills</button>
+                        </form>
+
+                        {% endif %}
+
+
+
+                    </li>
+
+
+                    <li class="list-inline-item">
+
+                        {% if profile.star%}
+                        <form method="POST" action="{% url 'profile_star' profile.id %}"> {% csrf_token %}
+                            <button type="submit" class="btn btn-warning">Star</button>
+                        </form>
+
+                        {% else %}
+
+                        <form method="POST" action="{% url 'profile_star' profile.id %}"> {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary">Star</button>
+                        </form>
+
+                        {% endif %}
+
+                    </li>
+
+
+
+                    <li class="list-inline-item">
+                        <form method="POST" action="{% url 'profile_delete' profile.id %}"> {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </li>
+
+
+                </ul>
+            </div>
+            <div class="px-4 py-3">
+                <h5 class="mb-0">Skills</h5>
+
+                <div class="p-4 rounded shadow-sm bg-light">
+                    {% if not got_skills %}
+                    {%for skill in skills%}
+                    <p class="font-italic mb-0">{{skill}}</p>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0">Comments</h5>
+                </div>
+
+                {% for comment in profile.comment_set.all %}
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        {{comment.date}}
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>{{comment.comment}}</p>
+                        </blockquote>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0">Add Comment</h5>
+                </div>
+                <div class="row">
+
+                    <form method="POST" action="{% url 'profile_detail' profile.id %}"> {% csrf_token %}
+                        <div class="mb-3">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"
+                                name="c"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </form>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+
+<!-- {% for profile in profiles %}
+
+
+
+
+<div class="card text-white bg-dark mb-3">
+    <div class="row g-0">
+        <div class="col-12 col-sm-4 col-md-3 col-lg-2">
+            <img src="{{profile.avatar_url}}" class="img-fluid rounded-start" style="width: 180px;"
+                alt="The avatar of the profile">
+        </div>
+        <div class="col-12 col-sm-8 col-md-9 col-lg-10">
+            <div class="card-body container-fluid">
+                <div class="row justify-content-between">
+                    <h5 class="card-title col-8 col-md-9 col-lg-10">{{ profile.name }}</h5>
+                    <a class="card-text col-4 col-md-3 col-lg-2" href="{{profile.html_url}}"><small
+                            class="text-muted">Github
+                            page</small></a>
+                </div>
+
+                <div class="row card-body container-fluid">
+                    There is no comments to show
+                </div>
+                <div class="row card-body container-fluid">
+                    <a href="#" class="btn btn-success btn-sm">Show Details</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{% endfor %} -->
+
+
+
+
+
+
+
+
+{% endblock content %}
