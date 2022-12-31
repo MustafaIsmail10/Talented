@@ -16,7 +16,6 @@ This software was implemented using Djanog and python
 ## Run
 
 In your command line type the following
-
 * git clone git@github.com:MustafaIsmail10/Talented.git
 * pip install -r requirements
 * python manage.py runserver
