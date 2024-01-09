@@ -15,12 +15,13 @@ This software was implemented using Djanog and python
 ## Run
 
 In your command line type the following
-   
-   * git clone git@github.com:MustafaIsmail10/Talented.git
-   * pip install -r requirements
-   * python manage.py runserver
+```
+   git clone git@github.com:MustafaIsmail10/Talented.git
+   pip install -r requirements
+   python manage.py runserver
+```
 
-The got to http://localhost:8000/ in your favorite web browser and create an account and enjoy
+Then got to http://localhost:8000/ in your favorite web browser and create an account and enjoy
 
 ## Deployment
 
